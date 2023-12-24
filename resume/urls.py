@@ -1,6 +1,7 @@
-from .views import IndexView
 from django.urls import path
+from .views import ResumeInformationView
 
 urlpatterns = [
-    path('', IndexView.as_view(), name='home'),
+    path("create/", ResumeInformationView.as_view(), name="resume-information"),
+    # path("create/information/", resumeInformationView, name="information-create"),
 ]

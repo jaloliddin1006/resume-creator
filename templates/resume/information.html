@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Add Personal Information{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+
+  <form id="resumeForm" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- General Information -->
+    <ul class="informationForm">
+        <label for="full_name">Full Name:</label>
+        <li id="subject" class="information">{{ resume.full_name }}</li>
+
+        <label for="profession">Profession:</label>
+        <li id="profession" class="information">{{ resume.profession }}</li>
+
+        <label for="summary">Summary:</label>
+        <li id="summary" class="information">{{ resume.summary }}</li>
+
+        <label for="profile_pic">Picture:</label>
+        <li id="profile_pic" class="information">{{ resume.profile_pic }}</li>
+
+        <label for="birthday">birthday:</label>
+        <li id="birthday" class="information">{{ resume.birthday }}</li>
+    </ul>
+    {{ contact.as_p }}
+    {{ language.as_p }}
+        <!-- Submit Button -->
+        <input type="hidden" id="csrfToken" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        <input type="submit" value="Submit">
+    <button type="button" onclick=postData()>Yuborish</button>
+
+    </form>
+    <br>
+    <br>
+    <br>
+
+    <p><a href="{% url 'home' %}">Menu</a></p>
+    <p><a href="{% url 'home' %}">Keyingi sahifa</a></p>
+
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock content %}
