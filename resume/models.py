@@ -12,15 +12,26 @@ class BaseModels(models.Model):
     class Meta:
         abstract = True
         
+        
+class ResumeTemplates(BaseModels):
+    name = models.CharField(max_length=100)
+    photo = models.ImageField(upload_to='templates/', null=True,  blank=True, default='templates/default.png')
+    
+    def __str__(self):
+        return self.name
+    
 
 class Resume(BaseModels):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='resumes')
+    template = models.ForeignKey('ResumeTemplates', on_delete=models.CASCADE, related_name='resumes', null=True, blank=True)
     full_name = models.CharField(max_length=100)
     profession = models.CharField(max_length=100)
     summary = models.TextField()
     profile_pic = models.ImageField(upload_to='profile_pics/', null=True,  blank=True, default='profile_pics/default.png')
     birthday = models.DateField(default='2000-12-31')
     
+    class Meta:
+        ordering = ['-created_at',]
     def __str__(self):
         return self.full_name
     
