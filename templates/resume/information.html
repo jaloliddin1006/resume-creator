@@ -25,6 +25,10 @@
         <li id="birthday" class="information">{{ resume.birthday }}</li>
     </ul>
     {{ contact.as_p }}
+    <label for="educations">Educations:</label>
+    <ul id="educationsList"></ul>
+    <button type="button" onclick="addInput('educationsList', 'educations')">Add Educations</button>
+
     {{ language.as_p }}
         <!-- Submit Button -->
         <input type="hidden" id="csrfToken" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
